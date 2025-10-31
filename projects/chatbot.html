@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Asset-Support Chatbot</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Open Sans", sans-serif;
+      color: #fff;
+      background: #040d19;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    .project-title {
+      font-size: 28px;
+      font-weight: 700;
+      color: #12d640;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    
+    .project-meta {
+      background: rgba(18, 214, 64, 0.1);
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 25px;
+      border-left: 4px solid #12d640;
+    }
+    
+    .project-meta p {
+      margin: 8px 0;
+      font-size: 14px;
+    }
+    
+    .project-meta strong {
+      color: #12d640;
+    }
+    
+    .section-header {
+      font-size: 20px;
+      font-weight: 600;
+      color: #12d640;
+      margin-top: 25px;
+      margin-bottom: 12px;
+      border-bottom: 2px solid rgba(18, 214, 64, 0.3);
+      padding-bottom: 8px;
+    }
+    
+    p {
+      margin-bottom: 15px;
+      color: #ddd;
+    }
+    
+    .feature-box {
+      background: rgba(255, 255, 255, 0.03);
+      padding: 15px;
+      border-radius: 6px;
+      margin-bottom: 15px;
+      border-left: 3px solid #12d640;
+    }
+    
+    .feature-box h4 {
+      color: #12d640;
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    
+    .feature-box ul {
+      margin-left: 20px;
+      margin-top: 10px;
+    }
+    
+    .feature-box ul li {
+      margin-bottom: 8px;
+      color: #ccc;
+    }
+    
+    .highlight-box {
+      background: rgba(18, 214, 64, 0.15);
+      border: 2px solid rgba(18, 214, 64, 0.4);
+      padding: 15px;
+      border-radius: 8px;
+      margin: 20px 0;
+    }
+    
+    .highlight-box h4 {
+      color: #12d640;
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+      margin: 20px 0;
+    }
+    
+    .stat-card {
+      background: rgba(18, 214, 64, 0.1);
+      padding: 15px;
+      border-radius: 6px;
+      text-align: center;
+      border: 1px solid rgba(18, 214, 64, 0.3);
+    }
+    
+    .stat-number {
+      font-size: 28px;
+      font-weight: 700;
+      color: #12d640;
+    }
+    
+    .stat-label {
+      font-size: 12px;
+      color: #aaa;
+      margin-top: 5px;
+    }
+    
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 15px;
+    }
+    
+    .tech-badge {
+      background: #12d640;
+      color: #010e1b;
+      padding: 6px 12px;
+      border-radius: 15px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    ul {
+      margin-left: 20px;
+    }
+
+    ul li {
+      margin-bottom: 8px;
+      color: #ccc;
+    }
+
+    strong {
+      color: #12d640;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h1 class="project-title">Asset-Support Chatbot for Industrial Equipment Maintenance</h1>
+    
+    <div class="project-meta">
+      <p><strong>Duration:</strong> March 2025 – April 2025</p>
+      <p><strong>Role:</strong> AI/ML Engineer</p>
+      <p><strong>Company:</strong> Presage Insights</p>
+      <p><strong>Type:</strong> RAG-Based, Asset-Specific Chatbot with Real-Time Data Insights</p>
+    </div>
+
+    <h3 class="section-header">Project Overview</h3>
+    <p>
+      Developed an advanced AI-powered chatbot system designed to provide intelligent support for industrial equipment maintenance. 
+      The system integrates multiple AI capabilities including document retrieval (RAG), real-time sensor data analysis, web search, 
+      and natural conversation - all orchestrated through an intelligent routing system that automatically determines the best 
+      tool for each user query.
+    </p>
+
+    <div class="highlight-box">
+      <h4>🎯 Key Achievement</h4>
+      <p>
+        Reduced support ticket volume by <strong>40%</strong> and equipment downtime predictions by <strong>60%</strong> 
+        through automated, context-aware maintenance insights. Successfully onboarded <strong>50+ enterprise users</strong> 
+        during the beta phase with <strong>99.9% system uptime</strong>.
+      </p>
+    </div>
+
+    <h3 class="section-header">Core Features & Capabilities</h3>
+
+    <div class="feature-box">
+      <h4>🤖 Intelligent Query Routing System</h4>
+      <p>
+        Implemented an LLM-based intelligent classifier that analyzes user queries and automatically routes them to the 
+        appropriate processing tool:
+      </p>
+      <ul>
+        <li><strong>Document Retrieval:</strong> For technical manual queries, troubleshooting guides, and maintenance procedures</li>
+        <li><strong>Web Search:</strong> For latest industry updates, vendor information, and external resources</li>
+        <li><strong>Signal Processing Analysis:</strong> For real-time sensor data interpretation and anomaly detection</li>
+        <li><strong>General Chat:</strong> For conversational queries and general assistance</li>
+      </ul>
+      <p>The routing system achieves <strong>98% accuracy</strong> in tool selection.</p>
+    </div>
+
+    <div class="feature-box">
+      <h4>📚 RAG-Based Document Intelligence</h4>
+      <p>Built a sophisticated Retrieval-Augmented Generation pipeline for technical documentation:</p>
+      <ul>
+        <li>Automated document chunking and preprocessing of technical manuals</li>
+        <li>Embedding generation using <strong>all-mpnet-base-v2</strong> model</li>
+        <li>Vector storage and indexing in <strong>Pinecone</strong> for sub-second retrieval</li>
+        <li>Semantic search across thousands of document segments</li>
+        <li>Achieved <strong>85% faster</strong> information retrieval</li>
+        <li>Django REST API backend for document upload and processing</li>
+      </ul>
+    </div>
+
+    <div class="feature-box">
+      <h4>📊 Real-Time Signal Processing & Analytics</h4>
+      <p>Integrated live sensor data analysis capabilities for predictive maintenance:</p>
+      <ul>
+        <li>Real-time analysis of velocity, acceleration, spectrum, and harmonics</li>
+        <li>Pattern recognition for anomaly detection in sensor readings</li>
+        <li>Predictive alerts for potential equipment failures</li>
+        <li>Historical trend analysis and baseline comparisons</li>
+        <li>Integration with company's asset monitoring infrastructure</li>
+        <li>Contextual insights combining sensor data with maintenance history</li>
+      </ul>
+    </div>
+
+    <div class="feature-box">
+      <h4>🔍 Web Search Integration</h4>
+      <p>Enhanced chatbot with external knowledge access:</p>
+      <ul>
+        <li>Real-time web search for latest equipment updates</li>
+        <li>Vendor website crawling for parts availability</li>
+        <li>Integration of external knowledge with internal documentation</li>
+        <li>Citation and source tracking for all web-sourced information</li>
+      </ul>
+    </div>
+
+    <div class="feature-box">
+      <h4>💬 Natural Conversational Interface</h4>
+      <ul>
+        <li>Context-aware conversations with memory of previous interactions</li>
+        <li>Multi-turn dialogues for complex troubleshooting scenarios</li>
+        <li>Natural language understanding for technical and non-technical queries</li>
+        <li>Proactive suggestions based on equipment status</li>
+      </ul>
+    </div>
+
+    <h3 class="section-header">Technical Implementation</h3>
+
+    <div class="feature-box">
+      <h4>Backend Architecture</h4>
+      <ul>
+        <li><strong>Django REST API:</strong> Scalable backend with comprehensive endpoints</li>
+        <li><strong>Database Optimization:</strong> Advanced PostgreSQL indexing (50% faster responses)</li>
+        <li><strong>Asynchronous Processing:</strong> Celery + Redis for background tasks</li>
+        <li><strong>Query Classification:</strong> LLM-based routing with 98% accuracy</li>
+        <li><strong>Vector Database:</strong> Pinecone for semantic search</li>
+      </ul>
+    </div>
+
+    <div class="feature-box">
+      <h4>AI/ML Pipeline</h4>
+      <ul>
+        <li><strong>Embedding Model:</strong> all-mpnet-base-v2 for vectorization</li>
+        <li><strong>LLM Integration:</strong> Advanced language models for responses</li>
+        <li><strong>RAG Framework:</strong> Custom retrieval and generation pipeline</li>
+        <li><strong>Signal Processing:</strong> Real-time analysis algorithms</li>
+        <li><strong>Classification Model:</strong> Intent recognition for routing</li>
+      </ul>
+    </div>
+
+    <div class="feature-box">
+      <h4>Infrastructure & Deployment</h4>
+      <ul>
+        <li><strong>Cloud Platform:</strong> AWS EC2 for scalable compute</li>
+        <li><strong>Containerization:</strong> Docker for consistent deployment</li>
+        <li><strong>Web Server:</strong> Nginx for load balancing</li>
+        <li><strong>Database:</strong> PostgreSQL with advanced indexing</li>
+        <li><strong>Cache Layer:</strong> Redis for improved performance</li>
+      </ul>
+    </div>
+
+    <h3 class="section-header">Impact & Results</h3>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-number">85%</div>
+        <div class="stat-label">Faster Retrieval</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">98%</div>
+        <div class="stat-label">Routing Accuracy</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">50%</div>
+        <div class="stat-label">Response Time ↓</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">40%</div>
+        <div class="stat-label">Ticket Reduction</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">60%</div>
+        <div class="stat-label">Downtime ↓</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">50+</div>
+        <div class="stat-label">Beta Users</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">99.9%</div>
+        <div class="stat-label">Uptime</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">&lt;1s</div>
+        <div class="stat-label">Search Time</div>
+      </div>
+    </div>
+
+    <h3 class="section-header">Technology Stack</h3>
+    <div class="tech-stack">
+      <span class="tech-badge">Python</span>
+      <span class="tech-badge">Django</span>
+      <span class="tech-badge">REST API</span>
+      <span class="tech-badge">LangChain</span>
+      <span class="tech-badge">LLMs</span>
+      <span class="tech-badge">RAG</span>
+      <span class="tech-badge">Pinecone</span>
+      <span class="tech-badge">PostgreSQL</span>
+      <span class="tech-badge">Redis</span>
+      <span class="tech-badge">Celery</span>
+      <span class="tech-badge">Docker</span>
+      <span class="tech-badge">Nginx</span>
+      <span class="tech-badge">AWS EC2</span>
+      <span class="tech-badge">all-mpnet-base-v2</span>
+      <span class="tech-badge">NLP</span>
+      <span class="tech-badge">Transformers</span>
+      <span class="tech-badge">Signal Processing</span>
+    </div>
+
+    <h3 class="section-header">Key Learnings</h3>
+    <ul>
+      <li><strong>Intelligent Routing:</strong> Designing accurate query classification across different domains</li>
+      <li><strong>Performance Optimization:</strong> Database indexing and caching for real-time queries</li>
+      <li><strong>RAG Pipeline:</strong> Balancing chunk size, semantic accuracy, and retrieval speed</li>
+      <li><strong>Multi-Modal Integration:</strong> Combining structured sensor data with unstructured documents</li>
+      <li><strong>Production Deployment:</strong> Architecting robust, scalable infrastructure</li>
+    </ul>
+
+    <h3 class="section-header">Future Enhancements</h3>
+    <ul>
+      <li>Multi-language support for international documentation</li>
+      <li>Visual AI integration for image-based troubleshooting</li>
+      <li>Advanced predictive analytics using historical data</li>
+      <li>Integration with IoT platforms for expanded coverage</li>
+      <li>Voice interface for hands-free operation</li>
+    </ul>
+
+  </div>
+
+</body>
+
+</html>
