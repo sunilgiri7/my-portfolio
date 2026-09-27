@@ -1,14 +1,20 @@
 /**
 * Template Name: Personal - v2.1.0
-* Template URL: https://bootstrapmade.com/personal-free-resume-bootstrap-template/
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
+* Custom motion layer for Sunil Giri portfolio
 */
 !(function($) {
   "use strict";
 
-  // Nav Menu
-  $(document).on('click', '.nav-menu a, .mobile-nav a', function(e) {
+  function revealSection($section) {
+    $section.find('.edu-card, .experience-card, .project-card, .skill-group, .icon-box, .info-box, .count-box, .cert-card, .link-card, .portrait-frame, .about-grid')
+      .each(function(i) {
+        var el = this;
+        el.style.animationDelay = (i * 45) + 'ms';
+        el.classList.add('rise-in');
+      });
+  }
+
+  $(document).on('click', '.nav-menu a, .mobile-nav a, .hero-actions a', function(e) {
     if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
       var hash = this.hash;
       var target = $(hash);
@@ -31,10 +37,12 @@
           setTimeout(function() {
             $("section").removeClass('section-show');
             $(hash).addClass('section-show');
+            revealSection($(hash));
           }, 350);
         } else {
           $("section").removeClass('section-show');
           $(hash).addClass('section-show');
+          revealSection($(hash));
         }
 
         if ($('body').hasClass('mobile-nav-active')) {
@@ -44,12 +52,10 @@
         }
 
         return false;
-
       }
     }
   });
 
-  // Activate/show sections on load with hash links
   if (window.location.hash) {
     var initial_nav = window.location.hash;
     if ($(initial_nav).length) {
@@ -59,17 +65,17 @@
       setTimeout(function() {
         $("section").removeClass('section-show');
         $(initial_nav).addClass('section-show');
+        revealSection($(initial_nav));
       }, 350);
     }
   }
 
-  // Mobile Navigation
   if ($('.nav-menu').length) {
     var $mobile_nav = $('.nav-menu').clone().prop({
       class: 'mobile-nav d-lg-none'
     });
     $('body').append($mobile_nav);
-    $('body').prepend('<button type="button" class="mobile-nav-toggle d-lg-none"><i class="icofont-navigation-menu"></i></button>');
+    $('body').prepend('<button type="button" class="mobile-nav-toggle d-lg-none" aria-label="Open menu"><i class="icofont-navigation-menu"></i></button>');
     $('body').append('<div class="mobile-nav-overly"></div>');
 
     $(document).on('click', '.mobile-nav-toggle', function(e) {
@@ -92,40 +98,13 @@
     $(".mobile-nav, .mobile-nav-toggle").hide();
   }
 
-  // jQuery counterUp
-  $('[data-toggle="counter-up"]').counterUp({
-    delay: 10,
-    time: 1000
-  });
-
-  // Skills section
-  $('.skills-content').waypoint(function() {
-    $('.progress .progress-bar').each(function() {
-      $(this).css("width", $(this).attr("aria-valuenow") + '%');
+  if ($.fn.counterUp) {
+    $('[data-toggle="counter-up"]').counterUp({
+      delay: 10,
+      time: 1000
     });
-  }, {
-    offset: '80%'
-  });
+  }
 
-  // Testimonials carousel (uses the Owl Carousel library)
-  $(".testimonials-carousel").owlCarousel({
-    autoplay: true,
-    dots: true,
-    loop: true,
-    responsive: {
-      0: {
-        items: 1
-      },
-      768: {
-        items: 2
-      },
-      900: {
-        items: 3
-      }
-    }
-  });
-
-  // Porfolio isotope and filter
   $(window).on('load', function() {
     var portfolioIsotope = $('.portfolio-container').isotope({
       itemSelector: '.portfolio-item',
@@ -135,17 +114,37 @@
     $('#portfolio-flters li').on('click', function() {
       $("#portfolio-flters li").removeClass('filter-active');
       $(this).addClass('filter-active');
-
       portfolioIsotope.isotope({
         filter: $(this).data('filter')
       });
     });
-
   });
 
-  // Initiate venobox (lightbox feature used in portofilo)
   $(document).ready(function() {
-    $('.venobox').venobox();
+    $('.venobox').venobox({
+      numeratio: true,
+      infinigall: true
+    });
   });
+
+  var glow = document.querySelector('.cursor-glow');
+  if (glow && window.matchMedia('(pointer: fine)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.body.classList.add('is-pointer');
+    var x = window.innerWidth / 2;
+    var y = window.innerHeight / 2;
+    var tx = x;
+    var ty = y;
+    window.addEventListener('pointermove', function(e) {
+      tx = e.clientX;
+      ty = e.clientY;
+    });
+    function loop() {
+      x += (tx - x) * 0.12;
+      y += (ty - y) * 0.12;
+      glow.style.transform = 'translate3d(' + x + 'px,' + y + 'px,0)';
+      requestAnimationFrame(loop);
+    }
+    loop();
+  }
 
 })(jQuery);
