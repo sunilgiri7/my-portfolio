@@ -98,13 +98,6 @@
     $(".mobile-nav, .mobile-nav-toggle").hide();
   }
 
-  if ($.fn.counterUp) {
-    $('[data-toggle="counter-up"]').counterUp({
-      delay: 10,
-      time: 1000
-    });
-  }
-
   $(window).on('load', function() {
     var portfolioIsotope = $('.portfolio-container').isotope({
       itemSelector: '.portfolio-item',
