@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>CMMS IoT Telemetry Platform &amp; RAG Diagnostics</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Sora", "Open Sans", sans-serif;
+      color: #fff;
+      background: #040d19;
+      padding: 24px;
+      line-height: 1.65;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .project-title {
+      font-size: 28px;
+      font-weight: 700;
+      color: #3ee0a0;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .project-subtitle {
+      text-align: center;
+      color: #9aa7bb;
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+
+    .project-meta {
+      background: rgba(62, 224, 160, 0.08);
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 25px;
+      border-left: 4px solid #3ee0a0;
+    }
+
+    .project-meta p {
+      margin: 8px 0;
+      font-size: 14px;
+    }
+
+    .project-meta strong {
+      color: #3ee0a0;
+    }
+
+    .section-header {
+      font-size: 20px;
+      font-weight: 600;
+      color: #3ee0a0;
+      margin-top: 25px;
+      margin-bottom: 12px;
+      border-bottom: 2px solid rgba(62, 224, 160, 0.28);
+      padding-bottom: 8px;
+    }
+
+    p {
+      margin-bottom: 15px;
+      color: #ddd;
+    }
+
+    ul {
+      margin-left: 20px;
+    }
+
+    ul li {
+      margin-bottom: 8px;
+      color: #ccc;
+    }
+
+    .feature-box {
+      background: rgba(255, 255, 255, 0.03);
+      padding: 15px;
+      border-radius: 6px;
+      margin-bottom: 15px;
+      border-left: 3px solid #3ee0a0;
+    }
+
+    .feature-box h4 {
+      color: #3ee0a0;
+      font-size: 17px;
+      margin-bottom: 10px;
+    }
+
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 15px;
+    }
+
+    .tech-badge {
+      background: #3ee0a0;
+      color: #04121a;
+      padding: 6px 12px;
+      border-radius: 15px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .flow {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      margin: 14px 0 18px;
+      font-size: 12px;
+      color: #9aa7bb;
+    }
+
+    .flow span {
+      border: 1px solid rgba(232, 237, 245, 0.18);
+      border-radius: 999px;
+      padding: 6px 12px;
+    }
+
+    .metric-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin: 18px 0;
+    }
+
+    .metric {
+      flex: 1 1 180px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(232, 237, 245, 0.10);
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+
+    .metric strong {
+      display: block;
+      color: #3ee0a0;
+      font-size: 24px;
+      line-height: 1.2;
+    }
+
+    .metric span {
+      color: #9aa7bb;
+      font-size: 12px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1 class="project-title">CMMS IoT Telemetry Platform &amp; RAG Diagnostics</h1>
+    <p class="project-subtitle">Real-time industrial telemetry, paired with a retrieval assistant that answers
+      maintenance questions</p>
+
+    <div class="project-meta">
+      <p><strong>Tech Stack:</strong> MQTT, AWS IoT Core, TimescaleDB, PostgreSQL, Django REST, WebSockets, Pinecone
+      </p>
+      <p><strong>Focus:</strong> Industrial IoT, time-series storage, retrieval-augmented diagnostics</p>
+      <p><strong>Type:</strong> Production platform</p>
+    </div>
+
+    <h3 class="section-header">Overview</h3>
+    <p>
+      Industrial maintenance teams were making decisions from dashboards that could only show the last few hours of
+      sensor data, while the answers to their actual questions lived in technical manuals nobody had time to read. This
+      platform closes both gaps: a telemetry backend that keeps years of high-resolution sensor history queryable in
+      real time, and a RAG assistant that reads the documentation.
+    </p>
+
+    <h3 class="section-header">Architecture</h3>
+    <div class="flow">
+      <span>100+ sensors</span><span>→</span><span>MQTT</span><span>→</span><span>AWS IoT Core</span>
+      <span>→</span><span>TimescaleDB</span><span>→</span><span>WebSockets</span>
+    </div>
+    <ul>
+      <li><strong>Ingestion</strong> — MQTT topics feed AWS IoT Core, which streams device payloads into a TimescaleDB
+        hypertable.</li>
+      <li><strong>Continuous aggregates</strong> — pre-rolled hourly and daily views keep long-range queries fast instead
+        of scanning raw points.</li>
+      <li><strong>Live delivery</strong> — WebSocket channels push both raw and aggregated windows to dashboards, from
+        the last minute out to five-year intervals.</li>
+    </ul>
+
+    <h3 class="section-header">Diagnostics Assistant</h3>
+    <p>
+      A Pinecone-backed retrieval layer indexes maintenance manuals, fault codes, and service history. Engineers ask a
+      question in plain language and get an answer grounded in the actual documentation, cross-referenced with the
+      asset's own telemetry.
+    </p>
+
+    <h3 class="section-header">Outcome</h3>
+    <div class="metric-row">
+      <div class="metric"><strong>45%</strong><span>Lower query latency</span></div>
+      <div class="metric"><strong>40%</strong><span>Fewer manual support tickets</span></div>
+      <div class="metric"><strong>100+</strong><span>Sensors streaming live</span></div>
+    </div>
+    <p>
+      The win was not a better model — it was removing the wait. Aggregates and WebSockets made the platform feel
+      instant, and the assistant absorbed the repetitive questions that used to land on the support desk.
+    </p>
+
+    <h3 class="section-header">Technology Stack</h3>
+    <div class="tech-stack">
+      <span class="tech-badge">MQTT</span>
+      <span class="tech-badge">AWS IoT Core</span>
+      <span class="tech-badge">TimescaleDB</span>
+      <span class="tech-badge">PostgreSQL</span>
+      <span class="tech-badge">Django REST</span>
+      <span class="tech-badge">WebSockets</span>
+      <span class="tech-badge">Pinecone</span>
+      <span class="tech-badge">Docker</span>
+    </div>
+  </div>
+</body>
+
+</html>

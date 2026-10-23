@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Multi-Class Fault Classification</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Sora", "Open Sans", sans-serif;
+      color: #fff;
+      background: #040d19;
+      padding: 24px;
+      line-height: 1.65;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .project-title {
+      font-size: 28px;
+      font-weight: 700;
+      color: #3ee0a0;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .project-subtitle {
+      text-align: center;
+      color: #9aa7bb;
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+
+    .project-meta {
+      background: rgba(62, 224, 160, 0.08);
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 25px;
+      border-left: 4px solid #3ee0a0;
+    }
+
+    .project-meta p {
+      margin: 8px 0;
+      font-size: 14px;
+    }
+
+    .project-meta strong {
+      color: #3ee0a0;
+    }
+
+    .section-header {
+      font-size: 20px;
+      font-weight: 600;
+      color: #3ee0a0;
+      margin-top: 25px;
+      margin-bottom: 12px;
+      border-bottom: 2px solid rgba(62, 224, 160, 0.28);
+      padding-bottom: 8px;
+    }
+
+    p {
+      margin-bottom: 15px;
+      color: #ddd;
+    }
+
+    ul {
+      margin-left: 20px;
+    }
+
+    ul li {
+      margin-bottom: 8px;
+      color: #ccc;
+    }
+
+    .feature-box {
+      background: rgba(255, 255, 255, 0.03);
+      padding: 15px;
+      border-radius: 6px;
+      margin-bottom: 15px;
+      border-left: 3px solid #3ee0a0;
+    }
+
+    .feature-box h4 {
+      color: #3ee0a0;
+      font-size: 17px;
+      margin-bottom: 10px;
+    }
+
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 15px;
+    }
+
+    .tech-badge {
+      background: #3ee0a0;
+      color: #04121a;
+      padding: 6px 12px;
+      border-radius: 15px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 14px;
+    }
+
+    th,
+    td {
+      text-align: left;
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(232, 237, 245, 0.10);
+      color: #ccc;
+    }
+
+    th {
+      color: #3ee0a0;
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1 class="project-title">Multi-Class Fault Classification</h1>
+    <p class="project-subtitle">Inferring machine operating state from noisy industrial sensor trends</p>
+
+    <div class="project-meta">
+      <p><strong>Tech Stack:</strong> Python, Scikit-learn, Pandas, NumPy, TimescaleDB</p>
+      <p><strong>Focus:</strong> Anomaly detection, time-series classification, feature engineering</p>
+      <p><strong>Type:</strong> Production ML</p>
+    </div>
+
+    <h3 class="section-header">Problem</h3>
+    <p>
+      Industrial machinery rarely fails without warning — it drifts. A pump slowly loses pressure head, a motor's
+      vibration signature shifts, a compressor starts cycling differently. Operators could see raw sensor lines, but
+      reading a trend across dozens of channels in real time is not a realistic ask.
+    </p>
+    <p>
+      The goal was a model that answers a simpler question continuously: <em>what state is this machine in right now?</em>
+    </p>
+
+    <h3 class="section-header">Approach</h3>
+    <div class="feature-box">
+      <h4>Feature engineering did most of the work</h4>
+      <p>
+        Raw sensor streams are noisy and unaligned. Before any model was trained, the signal had to be made learnable —
+        and that is where most of the accuracy came from.
+      </p>
+    </div>
+    <ul>
+      <li><strong>Time-domain features</strong> — statistical moments, rolling-window means and variances, rate-of-change
+        over multiple horizons.</li>
+      <li><strong>Frequency-domain features</strong> — band-energy proxies that separate a healthy vibration signature
+        from a degrading one, without needing a full spectral pipeline on every reading.</li>
+      <li><strong>Multi-class classifier</strong> — trained to distinguish operating modes (idle, nominal, loaded,
+        faulted) rather than a single binary healthy/unhealthy flag.</li>
+      <li><strong>Real-time surfacing</strong> — mode predictions and confidence indicators feed live dashboards
+        alongside the raw telemetry.</li>
+    </ul>
+
+    <h3 class="section-header">Why multi-class instead of binary</h3>
+    <table>
+      <tr>
+        <th>Binary approach</th>
+        <th>Multi-class approach</th>
+      </tr>
+      <tr>
+        <td>Flags a fault only once behaviour is already abnormal</td>
+        <td>Identifies the operating mode, so drift is visible before failure</td>
+      </tr>
+      <tr>
+        <td>One threshold per sensor, tuned by hand</td>
+        <td>One model across many correlated channels</td>
+      </tr>
+      <tr>
+        <td>No guidance on what changed</td>
+        <td>Mode transitions point to which regime the asset moved into</td>
+      </tr>
+    </table>
+
+    <h3 class="section-header">Technology Stack</h3>
+    <div class="tech-stack">
+      <span class="tech-badge">Python</span>
+      <span class="tech-badge">Scikit-learn</span>
+      <span class="tech-badge">Pandas</span>
+      <span class="tech-badge">NumPy</span>
+      <span class="tech-badge">Time-Series</span>
+      <span class="tech-badge">Anomaly Detection</span>
+      <span class="tech-badge">Feature Engineering</span>
+    </div>
+
+    <h3 class="section-header">Takeaway</h3>
+    <p>
+      On noisy field data, model choice matters far less than whether the features preserve the physical meaning of the
+      signal. Encoding what a vibration band or a rolling variance actually represents beat every architecture
+      experiment that followed.
+    </p>
+  </div>
+</body>
+
+</html>

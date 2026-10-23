@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>KnowForge — Private Knowledge Operating Layer</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Sora", "Open Sans", sans-serif;
+      color: #fff;
+      background: #040d19;
+      padding: 24px;
+      line-height: 1.65;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .project-title {
+      font-size: 28px;
+      font-weight: 700;
+      color: #3ee0a0;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .project-subtitle {
+      text-align: center;
+      color: #9aa7bb;
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+
+    .project-meta {
+      background: rgba(62, 224, 160, 0.08);
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 25px;
+      border-left: 4px solid #3ee0a0;
+    }
+
+    .project-meta p {
+      margin: 8px 0;
+      font-size: 14px;
+    }
+
+    .project-meta strong {
+      color: #3ee0a0;
+    }
+
+    .section-header {
+      font-size: 20px;
+      font-weight: 600;
+      color: #3ee0a0;
+      margin-top: 25px;
+      margin-bottom: 12px;
+      border-bottom: 2px solid rgba(62, 224, 160, 0.28);
+      padding-bottom: 8px;
+    }
+
+    p {
+      margin-bottom: 15px;
+      color: #ddd;
+    }
+
+    ul {
+      margin-left: 20px;
+    }
+
+    ul li {
+      margin-bottom: 8px;
+      color: #ccc;
+    }
+
+    .feature-box {
+      background: rgba(255, 255, 255, 0.03);
+      padding: 15px;
+      border-radius: 6px;
+      margin-bottom: 15px;
+      border-left: 3px solid #3ee0a0;
+    }
+
+    .feature-box h4 {
+      color: #3ee0a0;
+      font-size: 17px;
+      margin-bottom: 10px;
+    }
+
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 15px;
+    }
+
+    .tech-badge {
+      background: #3ee0a0;
+      color: #04121a;
+      padding: 6px 12px;
+      border-radius: 15px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .flow {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      margin: 14px 0 18px;
+      font-size: 12px;
+      color: #9aa7bb;
+    }
+
+    .flow span {
+      border: 1px solid rgba(232, 237, 245, 0.18);
+      border-radius: 999px;
+      padding: 6px 12px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1 class="project-title">KnowForge</h1>
+    <p class="project-subtitle">A private knowledge operating layer that compiles unstructured PDFs into a queryable wiki</p>
+
+    <div class="project-meta">
+      <p><strong>Tech Stack:</strong> Python, FastAPI, PostgreSQL, Pinecone, LangGraph, BM25</p>
+      <p><strong>Focus:</strong> Retrieval-augmented generation, knowledge compilation, entity graphs</p>
+      <p><strong>Type:</strong> Personal R&amp;D platform</p>
+    </div>
+
+    <h3 class="section-header">Overview</h3>
+    <p>
+      Most RAG systems treat documents as a flat pile of chunks and hope the right one surfaces. KnowForge instead
+      <strong>compiles</strong> a document corpus into an organised knowledge base: unstructured PDFs are parsed,
+      synthesised at chunk level, and written out as a structured Markdown wiki that a human can read and a machine can
+      query.
+    </p>
+    <p>
+      The result is a private, self-hosted operating layer for personal and organisational knowledge — no vendor, no
+      data leaving the machine, and every answer traceable back to a source passage.
+    </p>
+
+    <h3 class="section-header">Compilation Pipeline</h3>
+    <div class="flow">
+      <span>PDF ingest</span><span>→</span><span>Chunk synthesis</span><span>→</span><span>Entity extraction</span>
+      <span>→</span><span>Markdown wiki</span><span>→</span><span>Temporal facts</span>
+    </div>
+    <ul>
+      <li><strong>Chunk-level synthesis</strong> — each passage is rewritten into a standalone, self-contained note
+        rather than stored raw, so retrieval does not depend on surrounding context.</li>
+      <li><strong>Entity graphs</strong> — extracted people, systems, and concepts are linked across documents to
+        support multi-hop questions.</li>
+      <li><strong>Temporal fact tracking</strong> — facts carry validity windows, so the system can distinguish what was
+        true at a point in time from what is true now.</li>
+      <li><strong>Contradiction detection</strong> — conflicting claims between sources are surfaced explicitly instead
+        of being silently averaged into one answer.</li>
+    </ul>
+
+    <h3 class="section-header">Hybrid Retrieval</h3>
+    <div class="feature-box">
+      <h4>Two retrievers, one ranking</h4>
+      <p>
+        Dense vector search (Pinecone) and lexical BM25 each fail in different ways — vectors miss exact identifiers,
+        BM25 misses paraphrase. KnowForge runs both and fuses the ranked lists with
+        <strong>Reciprocal Rank Fusion</strong>, which consistently beats either retriever alone without needing score
+        calibration.
+      </p>
+    </div>
+
+    <h3 class="section-header">Agentic Query Workflow</h3>
+    <p>A LangGraph workflow coordinates the request instead of a single retrieve-then-generate pass:</p>
+    <ul>
+      <li><strong>Query rewriting</strong> — ambiguous follow-ups are resolved into standalone questions.</li>
+      <li><strong>Entity expansion</strong> — the graph contributes related entities the question did not name.</li>
+      <li><strong>Candidate reranking</strong> — fused results are reordered against the rewritten query.</li>
+      <li><strong>Verification</strong> — answers are checked against retrieved passages before being returned.</li>
+    </ul>
+
+    <h3 class="section-header">Technology Stack</h3>
+    <div class="tech-stack">
+      <span class="tech-badge">Python</span>
+      <span class="tech-badge">FastAPI</span>
+      <span class="tech-badge">PostgreSQL</span>
+      <span class="tech-badge">Pinecone</span>
+      <span class="tech-badge">BM25</span>
+      <span class="tech-badge">RRF</span>
+      <span class="tech-badge">LangGraph</span>
+      <span class="tech-badge">Entity Graphs</span>
+      <span class="tech-badge">RAG</span>
+    </div>
+
+    <h3 class="section-header">Why it matters</h3>
+    <p>
+      The hard part of retrieval is rarely the embedding call — it is deciding what a document <em>means</em> well
+      enough to store it usefully. KnowForge is my working answer to that: treat knowledge compilation as a data
+      problem first, and the retrieval quality follows.
+    </p>
+  </div>
+</body>
+
+</html>
